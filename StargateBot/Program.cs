@@ -58,13 +58,15 @@ namespace StargateBot
             _client.UserJoined += async (s) =>
             {
                 Console.WriteLine($"{DateTime.Now.ToString("dd/MM/yyyy")} {DateTime.Now.ToString("HH:mm:ss")} New user has joined: {s.Username}"); // Log to the console that someone joined us.
-                await s.Guild.DefaultChannel.SendMessageAsync($"@everyone, Please welcome {s.Mention} to the server!\n\nFeel free to tell us a little about yourself, {s.Username}.\n\nHow long have you been a Stargate fan? What is your favourite episode? Who is your favourite character?\n\nPlease be sure to check out #the-rules and enjoy your stay."); // Announce them to the world
+                var channel = s.Guild.GetTextChannel(389788584284258306);
+                await channel.SendMessageAsync($"@everyone, We are receiving a GDO transmission. It's {s.Mention}. Opening the iris.\n\nWelcome, {s.Mention}.\n\nFeel free to tell us a little about yourself, {s.Username}.\n\nHow long have you been a Stargate fan? What is your favourite episode? Who is your favourite character?\n\nPlease be sure to check out #the-rules and enjoy your stay."); // Announce them to the world
 
             };
 
             _client.UserLeft += async (s) =>
             {
                 Console.WriteLine($"{DateTime.Now.ToString("dd/MM/yyyy")} {DateTime.Now.ToString("HH:mm:ss")} User left: {s.Username}"); // Why'd they leave? :(
+                var channel = s.Guild.GetTextChannel(389788584284258306);
                 await s.Guild.DefaultChannel.SendMessageAsync($"{s.Username} has left the server. This makes me sad."); // Say good bye to our comrade.
 
             };
