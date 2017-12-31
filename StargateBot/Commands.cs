@@ -72,18 +72,7 @@ namespace StargateBot
 
             }
 
-            [Command("listmemes")]
-            [Summary("Lists the memes array")]
-            public async Task ListMemes()
-            {
-                Console.WriteLine("\nList of memes in the array requested. Processing....");
-                for (int i = 0; i < Global.memes.Length; i++)
-                {
-                    Console.WriteLine($"{i} = {Global.memes[i]}");
-                }
-                await Context.Channel.SendMessageAsync($"I have listed the memes array in the console window.");
-
-            }
+           
 
             [Command("help")]
             [Summary("Show help")]
@@ -122,7 +111,16 @@ namespace StargateBot
                             await Context.Channel.SendMessageAsync($"Pong! I can see you, {userinfo.Mention}. The bots ping is: {ping}ms.");
                             break;
 
-                        default:
+                    case "listmemes":
+                        Console.WriteLine("\nList of memes in the array requested. Processing....");
+                        for (int i = 0; i < Global.memes.Length; i++)
+                        {
+                            Console.WriteLine($"{i} = {Global.memes[i]}");
+                        }
+                        await Context.Channel.SendMessageAsync($"I have listed the memes array in the console window.");
+                        break;
+
+                    default:
                             await Context.User.SendMessageAsync("Valid Commands are: test, reloadmemes, ping, version.");
                             await Context.Channel.SendMessageAsync($"Command vacant or not recognized. Valid commands have been PMed to you.");
                             break;
