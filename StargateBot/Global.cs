@@ -11,7 +11,7 @@ namespace StargateBot
     {
         public static int Number { get; set; }
         public static string[] memes = Directory.GetFiles(@"Memes\");
-        public static double version = 0.0001;
+        public static double version = 0.0002;
         public static string appname = "StargateBot";
 
         private static string text = File.ReadAllText(@"c:\important\sgtoken.txt", Encoding.UTF8); // Visual Studio keeps uploading Sneaky.cs... so we'll load the token from a file that Visual Studio can't see.

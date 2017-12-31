@@ -9,10 +9,7 @@ namespace StargateBot
 {
     public class Commands : ModuleBase<SocketCommandContext>
     {
-        private Commands ()
-            {
-            Console.WriteLine("Commands online.");
-            }
+
             [Command("square")]
             [Summary("Squares a number.")]
             public async Task SquareAsync([Summary("The number to square.")] int num)
@@ -47,8 +44,8 @@ namespace StargateBot
             public async Task TellMePi()
             {
                 double pi = Math.PI;
-                var userinfo = Context.User;
-                await Context.Channel.SendMessageAsync($"```You can't calculate pi yourself, {userinfo.Mention}? Pi is: {pi}```");
+                
+                await Context.Channel.SendMessageAsync($"```You can't calculate pi yourself, {Context.User.Mention}? Pi is: {pi}```");
 
             }
 
