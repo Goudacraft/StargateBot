@@ -58,7 +58,7 @@ namespace StargateBot
             _client.UserJoined += async (s) =>
             {
                 Console.WriteLine($"{DateTime.Now.ToString("dd/MM/yyyy")} {DateTime.Now.ToString("HH:mm:ss")} New user has joined: {s.Username}"); // Log to the console that someone joined us.
-                var channel = s.Guild.GetTextChannel(389788584284258306);
+                var channel = s.Guild.GetTextChannel(Global.welcomechannel);
                 await channel.SendMessageAsync($"@everyone, We are receiving a GDO transmission. It's {s.Mention}. Opening the iris.\n\nWelcome, {s.Mention}.\n\nFeel free to tell us a little about yourself, {s.Username}.\n\nHow long have you been a Stargate fan? What is your favourite episode? Who is your favourite character?\n\nPlease be sure to check out #the-rules and enjoy your stay."); // Announce them to the world
 
             };
@@ -66,8 +66,8 @@ namespace StargateBot
             _client.UserLeft += async (s) =>
             {
                 Console.WriteLine($"{DateTime.Now.ToString("dd/MM/yyyy")} {DateTime.Now.ToString("HH:mm:ss")} User left: {s.Username}"); // Why'd they leave? :(
-                var channel = s.Guild.GetTextChannel(389788584284258306);
-                await s.Guild.DefaultChannel.SendMessageAsync($"Chevron seven... Locked. Wormhome established.\n\n{s.Username} has left the server. I hope they return to Stargate Command in the future."); // Say good bye to our comrade.
+                var channel = s.Guild.GetTextChannel(Global.welcomechannel);
+                await channel.SendMessageAsync($"Chevron seven... Locked. Wormhole established.\n\n{s.Username} has left the server. I hope they return to Stargate Command in the future."); // Say good bye to our comrade.
 
             };
             // Block this task until the program is closed.
