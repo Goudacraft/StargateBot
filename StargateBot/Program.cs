@@ -24,6 +24,7 @@ namespace StargateBot
 
         public async Task MainAsync()
         {
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
 
             _client = new DiscordSocketClient(); //Create the discord client.
 
@@ -135,8 +136,11 @@ namespace StargateBot
             Console.WriteLine(LogMessage); // Log our logs to the console
             return Task.CompletedTask;
         }
-        
 
+        async void OnProcessExit(object sender, EventArgs e)
+        {
+            await Log("StargateBot exit command received. Closing program." + Environment.NewLine + Environment.NewLine);
+        }
 
     };
 

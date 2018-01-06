@@ -18,9 +18,16 @@ namespace StargateBot
                 await Context.Channel.SendMessageAsync($"{num}^2 = {Math.Pow(num, 2)}");
             }
 
+        [Command("aki")]
+        
+        public async Task Aki()
+        {
+            // We can also access the channel from the Command Context.
+            await Context.Channel.SendMessageAsync($"Have fun, {Context.User.Username}. And good luck.");
+        }
 
 
-            [Command("hi")]
+        [Command("hi")]
             [Summary("Say hi to the user.")]
             public async Task HiUser()
             {
