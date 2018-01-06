@@ -40,7 +40,8 @@ namespace StargateBot
                 ver = $"{Global.version}";  // non debug mode
             }
 
-            Console.WriteLine($"{Global.appname} v{ver}");
+            await Log($"{Global.appname} v{ver}");
+            //Console.WriteLine($"{Global.appname} v{ver}");
             Console.Title = $"{Global.appname} v{ver}";
 
             _services = new ServiceCollection()
@@ -116,13 +117,25 @@ namespace StargateBot
                 await context.Channel.SendMessageAsync(result.ErrorReason);
         }
 
-         
-        private Task Log(LogMessage msg)
+        private Task Log (string msg)
         {
-            Console.WriteLine($"{DateTime.Now.ToString("dd/MM/yyyy")} {msg.ToString()}"); // Log our logs to the console
+            string LogMessage = ($"{DateTime.Now.ToString("dd/MM/yyyy")} {msg.ToString()}");
+            File.AppendAllText(Global.logfile, LogMessage + Environment.NewLine);
+            
+            Console.WriteLine(LogMessage); // Log our logs to the console
             return Task.CompletedTask;
         }
-
+         
+        
+        private Task Log(LogMessage msg)
+        {
+            string LogMessage = ($"{DateTime.Now.ToString("dd/MM/yyyy")} {msg.ToString()}");
+            File.AppendAllText(Global.logfile, LogMessage + Environment.NewLine);
+            
+            Console.WriteLine(LogMessage); // Log our logs to the console
+            return Task.CompletedTask;
+        }
+        
 
 
     };
