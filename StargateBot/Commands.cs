@@ -19,11 +19,14 @@ namespace StargateBot
             }
 
         [Command("aki")]
-        
-        public async Task Aki()
+        public async Task Aki(string cmd = "")
         {
-            // We can also access the channel from the Command Context.
-            await Context.Channel.SendMessageAsync($"Have fun, {Context.User.Username}. And good luck.");
+
+            if (cmd.Length == 0)
+            {
+                await Context.Channel.SendMessageAsync($"Have fun, {Context.User.Username}. And good luck.");
+            }
+            
         }
 
 
