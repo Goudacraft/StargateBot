@@ -87,7 +87,10 @@ namespace StargateBot
         {
             var user = Context.User;
             var role = Context.Guild.Roles.FirstOrDefault(x => x.Name == therole);
-            await(user as IGuildUser).AddRoleAsync(role);
+            await (user as IGuildUser).RemoveRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "Tau'ri"));
+            await (user as IGuildUser).RemoveRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "The Nox"));
+            await (user as IGuildUser).RemoveRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "Tollan"));
+            await (user as IGuildUser).AddRoleAsync(role);
         }
 
 

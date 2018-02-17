@@ -12,7 +12,7 @@ namespace StargateBot
         public static int Number { get; set; }
         public static string[] memes = Directory.GetFiles(@"Memes\");
         
-        public static double version_rev = 9;
+        public static double version_rev = 10;
         public static double version_minor = 0;
         public static double version_major = 0;
         public static string version = $"{version_major}.{version_minor}.{version_rev}";
