@@ -80,6 +80,7 @@ namespace StargateBot
             
         }
 
+
         public async Task AddRole(string therole)
         {
             var user = Context.User;

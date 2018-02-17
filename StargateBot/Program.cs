@@ -6,6 +6,7 @@ using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace StargateBot
 {
@@ -63,6 +64,31 @@ namespace StargateBot
                 {
                     Console.WriteLine($"{DateTime.Now.ToString("dd/MM/yyyy")} {DateTime.Now.ToString("HH:mm:ss")} New user has joined: {s.Username}"); // Log to the console that someone joined us.
                     var channel = s.Guild.GetTextChannel(Global.welcomechannel);
+                    Random rnd = new Random();
+                    int rngrole = rnd.Next(1, 4);
+                    if (rngrole == 1)
+                    {
+                        var user = s;
+                        var role = s.Guild.Roles.FirstOrDefault(x => x.Name == "Tau'ri");
+                        await (user as IGuildUser).AddRoleAsync(role);
+                    } else if (rngrole == 2)
+                    {
+                        var user = s;
+                        var role = s.Guild.Roles.FirstOrDefault(x => x.Name == "The Nox");
+                        await (user as IGuildUser).AddRoleAsync(role);
+                    }
+                    else if (rngrole == 3)
+                    {
+                        var user = s;
+                        var role = s.Guild.Roles.FirstOrDefault(x => x.Name == "Tollan");
+                        await (user as IGuildUser).AddRoleAsync(role);
+                    }
+                    else if (rngrole == 4)
+                    {
+                        var user = s;
+                        var role = s.Guild.Roles.FirstOrDefault(x => x.Name == "Wraith");
+                        await (user as IGuildUser).AddRoleAsync(role);
+                    }
                     await channel.SendMessageAsync($"@everyone, We are receiving a GDO transmission. It's {s.Mention}. Opening the iris.\n\nWelcome, {s.Mention}.\n\nFeel free to tell us a little about yourself, {s.Username}.\n\nHow long have you been a Stargate fan? What is your favourite episode? Who is your favourite character?\n\nPlease be sure to check out #the-rules and enjoy your stay."); // Announce them to the world
                 }
                 else
