@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Discord.WebSocket;
 using Discord;
+using System.Linq;
 
 namespace StargateBot
 {
@@ -27,6 +28,66 @@ namespace StargateBot
                 await Context.Channel.SendMessageAsync($"Have fun, {Context.User.Username}. And good luck.");
             }
             
+        }
+
+        [Command("role")]
+        public async Task SetRole(string cmd = "")
+        {
+            Console.WriteLine($"{Context.User.Username} has requested a role.");
+            bool done = false;
+            while (done == false)
+            {
+                var user = Context.User as SocketGuildUser;
+                var role = (user as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name.ToLower() == "ancients (admin)");
+                if (user.Roles.Contains(role))
+                {
+                    Console.WriteLine("Denying request. User is admin.");
+                    await Context.Channel.SendMessageAsync($"You're an admin, {user.Nickname}. Request denied.");
+                    return;
+                }
+
+                done = true;
+            }
+            var command = cmd.ToLower();
+
+            switch (command)
+            {
+
+                case "tau'ri":
+                    await AddRole("Tau'ri");
+                    break;
+                case "nox":
+                    await AddRole("The Nox");
+                    break;
+                case "tollan":
+                    await AddRole("Tollan");
+                    break;
+                default:
+                    await Context.Channel.SendMessageAsync($"Hey {Context.User.Mention}. Thank you for opting to choose a role.\n\n" +
+                        $"Currently you can use the following commands to select a role. This is purely cosmetic at the moment.\n\n" +
+                        $"!role tau'ri - Become a member of the SGC from Earth.\n" +
+                        $"!role tollan - Join the ranks of Earth's first advanced ally.\n" +
+                        $"!role nox - Hide from the goa'uld like a true nox\n" +
+                        $"More are coming at a later date. Enjoy.");
+                    break;
+
+            }
+
+            if (done == false)
+            {
+                var user = Context.User;
+                var role = Context.Guild.Roles.FirstOrDefault(x => x.Name == "Tau'ri");
+                await (user as IGuildUser).AddRoleAsync(role);
+            }
+                
+            
+        }
+
+        public async Task AddRole(string therole)
+        {
+            var user = Context.User;
+            var role = Context.Guild.Roles.FirstOrDefault(x => x.Name == therole);
+            await(user as IGuildUser).AddRoleAsync(role);
         }
 
 
