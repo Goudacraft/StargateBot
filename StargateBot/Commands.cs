@@ -62,22 +62,19 @@ namespace StargateBot
                 case "tollan":
                     await AddRole("Tollan");
                     break;
+                case "wraith":
+                    await AddRole("Wraith");
+                    break;
                 default:
                     await Context.Channel.SendMessageAsync($"Hey {Context.User.Mention}. Thank you for opting to choose a role.\n\n" +
                         $"Currently you can use the following commands to select a role. This is purely cosmetic at the moment.\n\n" +
                         $"!role tau'ri - Become a member of the SGC from Earth.\n" +
                         $"!role tollan - Join the ranks of Earth's first advanced ally.\n" +
                         $"!role nox - Hide from the goa'uld like a true nox\n" +
+                        $"!role wraith - Feel like sapping the life out of the humans of the galaxy? This role is for you.\n" +
                         $"More are coming at a later date. Enjoy.");
                     break;
 
-            }
-
-            if (done == false)
-            {
-                var user = Context.User;
-                var role = Context.Guild.Roles.FirstOrDefault(x => x.Name == "Tau'ri");
-                await (user as IGuildUser).AddRoleAsync(role);
             }
                 
             
@@ -90,7 +87,9 @@ namespace StargateBot
             await (user as IGuildUser).RemoveRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "Tau'ri"));
             await (user as IGuildUser).RemoveRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "The Nox"));
             await (user as IGuildUser).RemoveRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "Tollan"));
+            await (user as IGuildUser).RemoveRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "Wraith"));
             await (user as IGuildUser).AddRoleAsync(role);
+            await Context.Channel.SendMessageAsync($"All done, {Context.User.Mention}.");
         }
 
 
