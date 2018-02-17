@@ -89,7 +89,7 @@ namespace StargateBot
                         var role = s.Guild.Roles.FirstOrDefault(x => x.Name == "Wraith");
                         await (user as IGuildUser).AddRoleAsync(role);
                     }
-                    await channel.SendMessageAsync($"We are receiving a GDO transmission. It's {s.Username}. Opening the iris.\n\nWelcome, {s.Username}.\n\nFeel free to tell us a little about yourself, {s.Username}.\n\nHow long have you been a Stargate fan? What is your favourite episode? Who is your favourite character?\n\nPlease be sure to check out #the-rules and enjoy your stay."); // Announce them to the world
+                    await channel.SendMessageAsync($"We are receiving a GDO transmission. It's {s.Username}. Opening the iris.\n\nWelcome to our little corner of the ~~galaxy~~ internet, {s.Username}.\n\nFeel free to tell us a little about yourself, {s.Username}.\n\nHow long have you been a Stargate fan? What is your favourite episode? Who is your favourite character?\n\nPlease be sure to check out #the-rules and enjoy your stay."); // Announce them to the world
                 }
                 else
                 {
