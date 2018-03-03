@@ -37,6 +37,7 @@ namespace StargateBot
             bool done = false;
             while (done == false)
             {
+
                 var user = Context.User as SocketGuildUser;
                 var role = (user as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name.ToLower() == "ancients (admin)");
                 if (user.Roles.Contains(role))
@@ -85,9 +86,19 @@ namespace StargateBot
         }
 
 
-        public async Task AddRole(string therole)
+        public async Task AddRole(string therole, ulong theuser = 0)
         {
-            var user = Context.User;
+            SocketUser user;
+            if (theuser == 0)
+            {
+                user = Context.User;
+            }
+            else
+            {
+                user = Context.Client.GetUser(theuser);
+            }
+
+
             var role = Context.Guild.Roles.FirstOrDefault(x => x.Name == therole);
             await (user as IGuildUser).RemoveRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "Tau'ri"));
             await (user as IGuildUser).RemoveRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "The Nox"));
@@ -165,31 +176,33 @@ namespace StargateBot
             public async Task AdminCommand(string cmd = "")
             {
                 string thecmd = cmd.ToLower();
-                if (Context.User.Username == "AussieEevee")
+            var user = Context.User as SocketGuildUser;
+            var role = (user as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name.ToLower() == "ancients (admin)");
+            if (user.Roles.Contains(role))
+            {
+                switch (thecmd)
                 {
-                    switch (thecmd)
-                    {
-                        case "test": 
-                            await Context.Channel.SendMessageAsync($"Admin Command Test");
-                            break; 
+                    case "test":
+                        await Context.Channel.SendMessageAsync($"Admin Command Test");
+                        break;
 
 
-                        case "reloadmemes":
-                            Console.WriteLine("Reload Meme directory requested.");
-                            Global.memes = Directory.GetFiles(@"Memes\");
-                            await Context.Channel.SendMessageAsync($"Memes refreshed. I have {Global.memes.Length} memes in my database.");
-                            break;
+                    case "reloadmemes":
+                        Console.WriteLine("Reload Meme directory requested.");
+                        Global.memes = Directory.GetFiles(@"Memes\");
+                        await Context.Channel.SendMessageAsync($"Memes refreshed. I have {Global.memes.Length} memes in my database.");
+                        break;
 
-                        case "version":
-                            await Context.Channel.SendMessageAsync($"This is {Global.appname} v{Global.version}");
-                            break;
+                    case "version":
+                        await Context.Channel.SendMessageAsync($"This is {Global.appname} v{Global.version}");
+                        break;
 
-                        case "ping":
-                            var userinfo = Context.User;
-                            var ping = Context.Client.Latency;
-                            // We can also access the channel from the Command Context.
-                            await Context.Channel.SendMessageAsync($"Pong! I can see you, {userinfo.Mention}. The bots ping is: {ping}ms.");
-                            break;
+                    case "ping":
+                        var userinfo = Context.User;
+                        var ping = Context.Client.Latency;
+                        // We can also access the channel from the Command Context.
+                        await Context.Channel.SendMessageAsync($"Pong! I can see you, {userinfo.Mention}. The bots ping is: {ping}ms.");
+                        break;
 
                     case "listmemes":
                         Console.WriteLine("\nList of memes in the array requested. Processing....");
@@ -201,17 +214,14 @@ namespace StargateBot
                         break;
 
                     default:
-                            await Context.User.SendMessageAsync("Valid Commands are: test, reloadmemes, ping, version.");
-                            await Context.Channel.SendMessageAsync($"Command vacant or not recognized. Valid commands have been PMed to you.");
-                            break;
-
-
-                    }
-
+                        await Context.User.SendMessageAsync("Valid Commands are: test, reloadmemes, ping, version.");
+                        await Context.Channel.SendMessageAsync($"Command vacant or not recognized. Valid commands have been PMed to you.");
+                        break;
 
 
                 }
-                else
+                return;
+            } else
                 {
                     await Context.Channel.SendMessageAsync($"Only admins can use these commands. Sorry, {Context.User.Username}.");
                 }
