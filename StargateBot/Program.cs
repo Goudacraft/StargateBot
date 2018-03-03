@@ -65,7 +65,7 @@ namespace StargateBot
                     Console.WriteLine($"{DateTime.Now.ToString("dd/MM/yyyy")} {DateTime.Now.ToString("HH:mm:ss")} New user has joined: {s.Username}"); // Log to the console that someone joined us.
                     var channel = s.Guild.GetTextChannel(Global.welcomechannel);
                     Random rnd = new Random();
-                    int rngrole = rnd.Next(1, 4);
+                    int rngrole = rnd.Next(1, 5);
                     if (rngrole == 1)
                     {
                         var user = s;
@@ -87,6 +87,12 @@ namespace StargateBot
                     {
                         var user = s;
                         var role = s.Guild.Roles.FirstOrDefault(x => x.Name == "Wraith");
+                        await (user as IGuildUser).AddRoleAsync(role);
+                    }
+                    else if (rngrole == 5)
+                    {
+                        var user = s;
+                        var role = s.Guild.Roles.FirstOrDefault(x => x.Name == "Furlings");
                         await (user as IGuildUser).AddRoleAsync(role);
                     }
                     await channel.SendMessageAsync($"We are receiving a GDO transmission. It's {s.Mention}. Opening the iris.\n\nWelcome to our little corner of the ~~galaxy~~ internet, {s.Username}.\n\nWe would love to know a little about you. How long have you been a Stargate fan? What is your favourite episode? Who is your favourite character?\n\nPlease be sure to check out #the-rules and enjoy your stay."); // Announce them to the world

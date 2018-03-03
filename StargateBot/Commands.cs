@@ -65,6 +65,9 @@ namespace StargateBot
                 case "wraith":
                     await AddRole("Wraith");
                     break;
+                case "furlings":
+                    await AddRole("Furlings");
+                    break;
                 default:
                     await Context.Channel.SendMessageAsync($"Hey {Context.User.Mention}. Thank you for opting to choose a role.\n\n" +
                         $"Currently you can use the following commands to select a role. This is purely cosmetic at the moment.\n\n" +
@@ -72,6 +75,7 @@ namespace StargateBot
                         $"!role tollan - Join the ranks of Earth's first advanced ally.\n" +
                         $"!role nox - Hide from the goa'uld like a true nox\n" +
                         $"!role wraith - Feel like sapping the life out of the humans of the galaxy? This role is for you.\n" +
+                        $"!role furlings - Become the mysterious 4th race of the great alliance.\n" +
                         $"More are coming at a later date. Enjoy.");
                     break;
 
@@ -89,6 +93,7 @@ namespace StargateBot
             await (user as IGuildUser).RemoveRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "The Nox"));
             await (user as IGuildUser).RemoveRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "Tollan"));
             await (user as IGuildUser).RemoveRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "Wraith"));
+            await (user as IGuildUser).RemoveRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "Furlings"));
             await (user as IGuildUser).AddRoleAsync(role);
             await Context.Channel.SendMessageAsync($"All done, {Context.User.Mention}.");
         }
@@ -167,6 +172,7 @@ namespace StargateBot
                         case "test": 
                             await Context.Channel.SendMessageAsync($"Admin Command Test");
                             break; 
+
 
                         case "reloadmemes":
                             Console.WriteLine("Reload Meme directory requested.");

@@ -13,7 +13,7 @@ namespace StargateBot
         public static string[] memes = Directory.GetFiles(@"Memes\");
         
         public static double version_rev = 0;
-        public static double version_minor = 1;
+        public static double version_minor = 2;
         public static double version_major = 1;
         public static string version = $"{version_major}.{version_minor}.{version_rev}";
             public static string appname = "StargateBot";
