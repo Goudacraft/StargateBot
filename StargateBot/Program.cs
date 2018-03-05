@@ -12,7 +12,7 @@ namespace StargateBot
 {
     class Program
     {
-
+        
         //set the version number, so we can check which version is running on the server
 
         static void Main(string[] args)
@@ -66,36 +66,43 @@ namespace StargateBot
                     var channel = s.Guild.GetTextChannel(Global.welcomechannel);
                     Random rnd = new Random();
                     int rngrole = rnd.Next(1, 5);
+                    
                     if (rngrole == 1)
                     {
                         var user = s;
                         var role = s.Guild.Roles.FirstOrDefault(x => x.Name == "Tau'ri");
+                        Runtime.therole = "Tau'ri";
                         await (user as IGuildUser).AddRoleAsync(role);
                     } else if (rngrole == 2)
                     {
                         var user = s;
                         var role = s.Guild.Roles.FirstOrDefault(x => x.Name == "The Nox");
+                        Runtime.therole = "The Nox";
                         await (user as IGuildUser).AddRoleAsync(role);
                     }
                     else if (rngrole == 3)
                     {
                         var user = s;
                         var role = s.Guild.Roles.FirstOrDefault(x => x.Name == "Tollan");
+                        Runtime.therole = "Tollan";
                         await (user as IGuildUser).AddRoleAsync(role);
                     }
                     else if (rngrole == 4)
                     {
                         var user = s;
                         var role = s.Guild.Roles.FirstOrDefault(x => x.Name == "Wraith");
+                        Runtime.therole = "Wraith";
                         await (user as IGuildUser).AddRoleAsync(role);
                     }
                     else if (rngrole == 5)
                     {
                         var user = s;
                         var role = s.Guild.Roles.FirstOrDefault(x => x.Name == "Furlings");
+                        Runtime.therole = "Furlings";
                         await (user as IGuildUser).AddRoleAsync(role);
                     }
-                    await channel.SendMessageAsync($"We are receiving a GDO transmission. It's {s.Mention}. Opening the iris.\n\nWelcome to our little corner of the ~~galaxy~~ internet, {s.Username}.\n\nWe would love to know a little about you. How long have you been a Stargate fan? What is your favourite episode? Who is your favourite character?\n\nPlease be sure to check out #the-rules and enjoy your stay."); // Announce them to the world
+                    await channel.SendMessageAsync($"We are receiving a GDO transmission. It's {s.Mention}. Opening the iris.\n\nWelcome to our little corner of the ~~galaxy~~ internet, {s.Username}.\n\nWe would love to know a little about you. How long have you been a Stargate fan? What is your favourite episode? Who is your favourite character?\n\nI have assigned you the {Runtime.therole} role. If you wish to change your role, please use the !role command.\n\nPlease be sure to check out #the-rules and enjoy your stay."); // Announce them to the world
+                    Runtime.therole = "";
                 }
                 else
                 {

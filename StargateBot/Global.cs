@@ -12,7 +12,7 @@ namespace StargateBot
         public static int Number { get; set; }
         public static string[] memes = Directory.GetFiles(@"Memes\");
         
-        public static double version_rev = 0;
+        public static double version_rev = 1;
         public static double version_minor = 2;
         public static double version_major = 1;
         public static string version = $"{version_major}.{version_minor}.{version_rev}";
@@ -25,6 +25,11 @@ namespace StargateBot
         public static string Token { get => token; } // Assign the token string to a public string so it can be accessed by the rest of the program.
 
         public static ulong welcomechannel = 389788584284258306;
+    }
+
+    class Runtime
+    {
+        public static string therole;
     }
 }
   
